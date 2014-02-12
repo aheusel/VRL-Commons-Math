@@ -45,13 +45,19 @@ public class ODESolver implements Serializable{
         FirstOrderIntegrator integrator = new DormandPrince54Integrator(minStep, maxStep, absTol, relTol); 
         
 //       FirstOrderIntegrator integrator = new EulerIntegrator(0.01);
+        
+        // Trajectory[] result = new Trajectory[4];
+        
+        //for(int i = 0; i < result.length; i++) {
+        //    result[i] = new Trajectory(label + "V,M,N,H");
+        //}
 
         final Trajectory result = new Trajectory(label);
 
         StepHandler stepHandler = new StepHandler() {
             @Override
             public void init(double t0, double[] y0, double t) {
-                result.add(t, y0[0]);
+ //               result.add(t, y0[0]); ist dieser wert korrekt?
 //                  System.out.println("step1: " + t);
             }
 
@@ -74,10 +80,10 @@ public class ODESolver implements Serializable{
         double[] y = new double[]{y0, n0.ninf(y0), m0.minf(y0), h0.hinf(y0) }; // initial state
         
         //Fehlercheck
-        System.out.println("check v1: "+y[0]);
-        System.out.println("check n1: "+y[1]);
-        System.out.println("check m1: "+y[2]);
-        System.out.println("check h1: "+y[3]);
+//        System.out.println("check v1: "+y[0]);
+//        System.out.println("check n1: "+y[1]);
+//        System.out.println("check m1: "+y[2]);
+//        System.out.println("check h1: "+y[3]);
         
         n0.setV(y[0]);
         m0.setV(y[0]);
@@ -99,7 +105,7 @@ public class ODESolver implements Serializable{
         System.out.println("check h3: "+y[3]);
  
 //        for(int i=0; i<y.length; i++){
-//                
+//                Math.pow(n,4)*gBarK*(y - eK) + Math.pow(m,3)*h*(y - eNa)
 //                System.out.println(""+y[i]);
 //                
 //            }

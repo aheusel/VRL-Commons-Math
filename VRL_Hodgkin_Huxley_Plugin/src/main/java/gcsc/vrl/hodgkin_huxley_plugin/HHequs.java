@@ -41,12 +41,23 @@ public class HHequs implements FirstOrderDifferentialEquations{
 //        vf.setN(yDot[1]);
 //        vf.setM(yDot[2]);
 //        vf.setH(yDot[3]);
+        
+        double v = y[0];
+        double n = y[1];
+        double m = y[2];
+        double h = y[3];
+        
+        vf.setN(n);
+        vf.setM(m);
+        vf.setH(h);
+        
+        nf.setV(v);
+        mf.setV(v);
+        hf.setV(v);
+        
         yDot[0] = vf.run(t, y[0]);
-//        nf.setV(yDot[0]);
         yDot[1] = nf.run(t, y[1]);
-//        mf.setV(yDot[0]);
         yDot[2] = mf.run(t, y[2]);
-//        hf.setV(yDot[0]);
         yDot[3] = hf.run(t, y[3]);
        
     }

@@ -91,7 +91,7 @@ public class VFunction2D implements Function2D, Serializable{
             @ParamInfo(name="gBar_L in mS/mm^2", options="value=0.003D") double gBarL, 
             @ParamInfo(name="E_L in mV", options="value=-54.387D") double eL, 
             @ParamInfo(name="externally injected current in mA/mm^2", options="value=8e-6D") double i,
-            @ParamInfo(name="Membrane conductance in mF/mm^2", options="value=0.001D") double cm) {
+            @ParamInfo(name="Membrane capacity in mF/mm^2", options="value=0.001D") double cm) {
         this.gBarK = gBarK;
         this.eK = eK;
         this.gBarNa = gBarNa;
@@ -99,51 +99,10 @@ public class VFunction2D implements Function2D, Serializable{
         this.gBarL = gBarL;
         this.eL = eL;
         this.i = i;
-        this.cm = cm;
-        
+        this.cm = cm;  
         
     }
 
-//    public void setgBarK(
-//             @ParamInfo(name="gBar_K in mS/mm^2", options="value=0.36D") double gBarK) {
-//        this.gBarK = gBarK;
-//    }
-//
-//    public void seteK(
-//            @ParamInfo(name="E_K in mV", options="value=-77.00D") double eK) {
-//        this.eK = eK;
-//    }
-//
-//    public void setgBarNa(
-//            @ParamInfo(name="gBar_Na in mS/mm^2", options="value=1.2D") double gBarNa) {
-//        this.gBarNa = gBarNa;
-//    }
-//
-//    public void seteNa(
-//            @ParamInfo(name="E_Na in mV", options="value=50.00D") double eNa) {
-//        this.eNa = eNa;
-//    }
-//
-//    public void setgBarL(
-//            @ParamInfo(name="gBar_L in mS/mm^2", options="value=0.003D") double gBarL) {
-//        this.gBarL = gBarL;
-//    }
-//
-//    public void seteL(
-//            @ParamInfo(name="E_L in mV", options="value=-54.387D") double eL) {
-//        this.eL = eL;
-//    }
-//
-//    public void setCm(
-//            @ParamInfo(name="Membrane conductance in uF/cm^2", options="value=1.0D") double cm) {
-//        this.cm = cm;
-//    }
-//    
-//    
-//    public void setI(
-//             @ParamInfo(name="externally injected current in mA/cm^2", options="value=0.50D") double i) {
-//        this.i = i;
-//    }
     @MethodInfo(name="setN", noGUI=true)
     public void setN(double n) {
         this.n = n;
@@ -158,38 +117,6 @@ public class VFunction2D implements Function2D, Serializable{
     public void setH(double h) {
         this.h = h;
     }
-//
-//    public double getgBarK() {
-//        return gBarK;
-//    }
-//
-//    public double geteK() {
-//        return eK;
-//    }
-//
-//    public double getgBarNa() {
-//        return gBarNa;
-//    }
-//
-//    public double geteNa() {
-//        return eNa;
-//    }
-//
-//    public double getgBarL() {
-//        return gBarL;
-//    }
-//
-//    public double geteL() {
-//        return eL;
-//    }
-//
-//    public double getI() {
-//        return i;
-//    }
-//
-//    public double getCm() {
-//        return cm;
-//    }
 
     @MethodInfo(name="getN", noGUI=true)
     public double getN() {

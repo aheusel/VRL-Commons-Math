@@ -38,11 +38,10 @@ public class NFunction2D implements Function2D{
     
      /**
      * implementation of the steady state (in)activation function in the HH model
-     * @param v membrane voltage (mV) 
      * @return Steady state inactivation function n_infinity
      */
     @MethodInfo(name="n infinity", noGUI=true)
-    public double ninf(double v){//im Prinzip liesse sich hier auch ein anderes v verwenden 
+    public double ninf(){//im Prinzip liesse sich hier auch ein anderes v verwenden 
         double alpha_n;
         double beta_n; 
         
@@ -66,11 +65,10 @@ public class NFunction2D implements Function2D{
     
     /**
      * Implementation of the voltage-dependent time constant in the HH model 
-     * @param v membrane voltage (mV)
      * @return voltage dependent time constant tau_n
      */
     @MethodInfo(name="time constant Tau n", noGUI=true)
-    public double taun(double v){
+    public double taun(){
         double alpha_n;
         double beta_n; 
         
@@ -95,7 +93,7 @@ public class NFunction2D implements Function2D{
    @Override 
    public Double run(Double x, Double y){
      
-      return (ninf(v)-y)/taun(v);
+      return (ninf()-y)/taun();
        
    }  
    

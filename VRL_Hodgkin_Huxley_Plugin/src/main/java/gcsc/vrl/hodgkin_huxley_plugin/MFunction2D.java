@@ -31,11 +31,11 @@ public class MFunction2D implements Function2D{
     
     /**
      * implementation of the steady state (in)activation function in the HH model
-     * @param v membrane voltage (mV)   
+     *  
      * @return Steady state inactivation function m_infinity
      */
     @MethodInfo(name="m infinity", noGUI=true)
-    public double minf(double v){
+    public double minf(){
         double alpha_m;
         double beta_m;
         if(v==-40){
@@ -52,12 +52,12 @@ public class MFunction2D implements Function2D{
     
     /**
      * Implementation of the voltage-dependent time constant in the HH model 
-     * @param v membrane voltage (mV) 
+     * 
      * @return voltage dependent time constant tau_m
      */
     
     @MethodInfo(name="time constant Tau m", noGUI=true)
-    public double taum(double v){
+    public double taum(){
         double alpha_m;
         double beta_m;
         if(v==-40){
@@ -74,7 +74,7 @@ public class MFunction2D implements Function2D{
     @Override 
    public Double run(Double x, Double y){
        
-     return (minf(v)-y)/taum(v);
+     return (minf()-y)/taum();
     
        
    }   

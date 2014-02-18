@@ -38,10 +38,17 @@ public class HHequs implements FirstOrderDifferentialEquations{
 
     @Override
     public void computeDerivatives(double t, double[] y, double[] yDot) throws MaxCountExceededException, DimensionMismatchException {
+//        vf.setN(yDot[1]);
+//        vf.setM(yDot[2]);
+//        vf.setH(yDot[3]);
         yDot[0] = vf.run(t, y[0]);
+//        nf.setV(yDot[0]);
         yDot[1] = nf.run(t, y[1]);
+//        mf.setV(yDot[0]);
         yDot[2] = mf.run(t, y[2]);
+//        hf.setV(yDot[0]);
         yDot[3] = hf.run(t, y[3]);
+       
     }
     
 }

@@ -38,28 +38,38 @@ public class VFunction2D implements Function2D, Serializable{
      * leakage conductance in mS/mm^2
      */
     public double gBarL;
+    
     /**
      * leakage equilibrium potential of potassium in mV
      */
     public double eL;
     
     /**
-     * induced current in nA/mm^2
+     * induced current in uA/mm^2
      */
     public double i;
+    
     /**
-     * membrane capacitance in nF/mm^2 
+     * membrane capacitance in uF/mm^2 
      */
     public double cm;
+    
+    
+    /**
+     * current time step, which is set in the ODESolver 
+     */ 
+    private double t;
     
     /**
      * potassium channel activation
      */
     private double n;
+    
     /**
      * sodium channel activation
      */
     private double m;
+    
     /**
      * sodium channel inactivation
      */
@@ -68,20 +78,18 @@ public class VFunction2D implements Function2D, Serializable{
     /**
      * constructor - creates 2D-voltage function
      */
-    
     public VFunction2D() {
     }
     
     /**
      * user interface to edit parameters of the Hodgkin-Huxley-Model
-     * @param gBarK
-     * @param eK
-     * @param gBarNa
-     * @param eNa
-     * @param gBarL
-     * @param eL
-     * @param i
-     * @param cm 
+     * @param gBarK maximal conductance of potassium
+     * @param eK equilibrium potential of potassium
+     * @param gBarNa maximal conductance of sodium
+     * @param eNa equilibrium potential of sodium
+     * @param gBarL maximal leakage-conductance
+     * @param eL equilibrium potential of leakage current
+     * @param cm membrane capacitance 
      */
     public void init(
             @ParamInfo(name="gBar_K in mS/mm^2", options="value=0.36D") double gBarK, 
@@ -89,20 +97,49 @@ public class VFunction2D implements Function2D, Serializable{
             @ParamInfo(name="gBar_Na in mS/mm^2", options="value=1.2D") double gBarNa, 
             @ParamInfo(name="E_Na in mV", options="value=50.00D") double eNa, 
             @ParamInfo(name="gBar_L in mS/mm^2", options="value=0.003D") double gBarL, 
-            @ParamInfo(name="E_L in mV", options="value=-54.387D") double eL, 
-            @ParamInfo(name="externally injected current in mA/mm^2", options="value=8e-6D") double i,
-            @ParamInfo(name="Membrane capacity in mF/mm^2", options="value=0.001D") double cm) {
+            @ParamInfo(name="E_L in mV", options="value=-54.387D") double eL,  
+            @ParamInfo(name="Membrane capacity in uF/mm^2", options="value=0.01D") double cm) {
         this.gBarK = gBarK;
         this.eK = eK;
         this.gBarNa = gBarNa;
         this.eNa = eNa;
         this.gBarL = gBarL;
         this.eL = eL;
-        this.i = i;
         this.cm = cm;  
         
     }
-
+    
+    /**
+     * Set the current time step - this is applied in ODESolver
+     * @param t current time step
+     */
+    @MethodInfo(name="setH", noGUI=true)
+    public void setCurrentT(double t){
+        this.t = t;
+    }
+    
+    /**
+     * User interface to set the onset- and offset-time of the external current
+     * @param ti0 Onset time
+     * @param tin Offset time
+     * @param i
+     */
+    public void setI(
+            @ParamInfo(name="Onset of external current (>0)")double ti0,
+            @ParamInfo(name="Offset of external current")double tin,
+            @ParamInfo(name="external current")double i){
+        
+        if(ti0>tin){
+            System.err.println("Onset time cannot be bigger than offset time!");//need exception here TODO
+        }
+        
+        if(ti0<=t && t<=tin ){
+            this.i=i;
+        }else{ 
+            this.i = 0;
+        }
+    }
+            
     @MethodInfo(name="setN", noGUI=true)
     public void setN(double n) {
         this.n = n;
@@ -117,7 +154,7 @@ public class VFunction2D implements Function2D, Serializable{
     public void setH(double h) {
         this.h = h;
     }
-
+    
     @MethodInfo(name="getN", noGUI=true)
     public double getN() {
         return n;
@@ -132,9 +169,8 @@ public class VFunction2D implements Function2D, Serializable{
     public double getH() {
         return h;
     }
-   
     
-      
+    
     /**
      * running the function
      * @param x

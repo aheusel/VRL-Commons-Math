@@ -38,11 +38,11 @@ public class MFunction2D implements Function2D{
     public double minf(){
         double alpha_m;
         double beta_m;
-        if(v==-40){
-            alpha_m = 1; //alpha_m = ?
-        }else{
+//        if(v==-40){
+//            alpha_m = 1; //alpha_m = ?
+//        }else{
             alpha_m = 0.1*(v+40)/(1-(Math.exp(-0.1*(v+40))));
-        }
+//        }
         
         beta_m = 4*Math.exp(-0.0556*(v+65));
         
@@ -60,11 +60,11 @@ public class MFunction2D implements Function2D{
     public double taum(){
         double alpha_m;
         double beta_m;
-        if(v==-40){
-            alpha_m = 1; //alpha_m = ?//fallunterscheidung ist schon noetig;morgen nochmal michael fragen, welche werte man nehmen sollte 
-        }else{
+//        if(v==-40){
+//            alpha_m = 1; //alpha_m = ?//fallunterscheidung ist schon noetig;morgen nochmal michael fragen, welche werte man nehmen sollte 
+//        }else{
             alpha_m = 0.1*(v+40)/(1-(Math.exp(-0.1*(v+40))));
-        }
+//        }
         
         beta_m = 4*Math.exp(-0.0556*(v+65));
         

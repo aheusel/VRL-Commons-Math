@@ -18,7 +18,7 @@ import eu.mihosoft.vrl.math.Function2D;
 public class NFunction2D implements Function2D{
    
     
-    private double v; //ist das so wirklich sinnvoll?
+    private double v; 
 
     public double getV() {
         return v;
@@ -45,12 +45,12 @@ public class NFunction2D implements Function2D{
         double alpha_n;
         double beta_n; 
         
-        if(v==-55){
-            alpha_n = 1/10;   //alpha_n = ?     
-       }else{
+//        if(v==-55){
+//            alpha_n = 1/10;   //alpha_n = ?     
+//       }else{
             alpha_n = 0.01*(v + 55)/(1-(Math.exp(-0.1*(v+55)))); //meins
 
-        }
+//        }
         beta_n = 0.125 * Math.exp(-0.0125*(v+65));
         
 //        if(v==10){
@@ -72,12 +72,12 @@ public class NFunction2D implements Function2D{
         double alpha_n;
         double beta_n; 
         
-        if(v==-55){
-            alpha_n = 1/10;  //alpha_n = ? 
-       }else{
+//        if(v==-55){
+//            alpha_n = 1/10;  //alpha_n = ? 
+//       }else{
             alpha_n = 0.01*(v + 55)/(1-(Math.exp(-0.1*(v+55))));
 
-        }
+//        }
         beta_n = 0.125 * Math.exp(-0.0125*(v+65));
 
 //        if(v==10){

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gcsc.vrl.hodgkin_huxley_plugin;
 
 
@@ -21,38 +17,42 @@ public class VFunction2D implements Function2D, Serializable{
     /**
      * conductance of potassium in mS/mm^2
      */
-    public double gBarK;
+    private double gBarK;
+    
     /**
      * equilibrium potential of potassium in mV
      */
-    public double eK;
-     /**
+    private double eK;
+    
+    /**
      * conductance of sodium in mS/mm^2
      */
-    public double gBarNa;
+    private double gBarNa;
+    
     /**
      * equilibrium potential of sodium in mV
      */
-    public double eNa;
-     /**
+    private double eNa;
+     
+    /**
      * leakage conductance in mS/mm^2
      */
-    public double gBarL;
+    private double gBarL;
     
     /**
      * leakage equilibrium potential of potassium in mV
      */
-    public double eL;
+    private double eL;
     
     /**
      * induced current in uA/mm^2
      */
-    public double i;
+    private double i;
     
     /**
      * membrane capacitance in uF/mm^2 
      */
-    public double cm;
+    private double cm;
     
     
     /**
@@ -133,13 +133,18 @@ public class VFunction2D implements Function2D, Serializable{
             System.err.println("Onset time cannot be bigger than offset time!");//need exception here TODO
         }
         
-        if(ti0<=t && t<=tin ){
-            this.i=i;
-        }else{ 
-            this.i = 0;
-        }
+      
+        
+            if(ti0<=t && tin>=t ){
+                this.i=i;
+            }else{
+                this.i = 0;     
+            }    
+            System.out.println("So jetzt ist hier aber unser I: "+this.i );    
+ 
     }
             
+   
     @MethodInfo(name="setN", noGUI=true)
     public void setN(double n) {
         this.n = n;

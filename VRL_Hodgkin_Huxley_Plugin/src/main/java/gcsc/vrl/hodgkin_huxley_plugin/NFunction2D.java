@@ -41,24 +41,19 @@ public class NFunction2D implements Function2D{
      * @return Steady state inactivation function n_infinity
      */
     @MethodInfo(name="n infinity", noGUI=true)
-    public double ninf(){//im Prinzip liesse sich hier auch ein anderes v verwenden 
+    public double ninf(){
         double alpha_n;
         double beta_n; 
         
-//        if(v==-55){
-//            alpha_n = 1/10;   //alpha_n = ?     
-//       }else{
-            alpha_n = 0.01*(v + 55)/(1-(Math.exp(-0.1*(v+55)))); //meins
+        if(v==-55){
+            alpha_n = 1/10;   //alpha_n = ?     
+       }else{
+            alpha_n = 0.01*(v + 55)/(1-(Math.exp(-0.1*(v+55)))); 
 
-//        }
+        }
         beta_n = 0.125 * Math.exp(-0.0125*(v+65));
         
-//        if(v==10){
-//            alpha_n = 1/10;   //alpha_n = ?     
-//        }else{         
-//             alpha_n = (10-v)/(100 * (Math.exp((10-v)/10)-1));
-//        }
-//        beta_n = 1/8 * Math.exp(-v/80);
+
         
         return alpha_n/(alpha_n + beta_n);
     }
@@ -90,6 +85,12 @@ public class NFunction2D implements Function2D{
         return 1/(alpha_n + beta_n);
     }
     
+    /**
+     * Running the function
+     * @param x
+     * @param y
+     * @return 
+     */
    @Override 
    public Double run(Double x, Double y){
      

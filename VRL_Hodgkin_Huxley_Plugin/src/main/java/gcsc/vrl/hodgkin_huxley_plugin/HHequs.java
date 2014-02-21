@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gcsc.vrl.hodgkin_huxley_plugin;
 
 import org.apache.commons.math3.exception.DimensionMismatchException;

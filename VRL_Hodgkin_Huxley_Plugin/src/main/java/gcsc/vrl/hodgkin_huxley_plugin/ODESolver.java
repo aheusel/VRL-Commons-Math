@@ -10,9 +10,9 @@ import eu.mihosoft.vrl.annotation.OutputInfo;
 import eu.mihosoft.vrl.annotation.ParamInfo;
 import eu.mihosoft.vrl.math.Trajectory;
 import java.io.Serializable;
-//import java.util.Arrays;
-//import java.util.Collections;
-//import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 import org.apache.commons.math3.ode.FirstOrderIntegrator;
 import org.apache.commons.math3.ode.nonstiff.DormandPrince54Integrator;
@@ -58,7 +58,7 @@ public class ODESolver implements Serializable {
             //            String label,
             @ParamInfo(name = "t0", options = "value=0.0D") double t0,
             @ParamInfo(name = "tn", options = "value=200.0D") double tn,
-            @ParamInfo(name = "v0", options = "value=-70.0") double y0,
+            @ParamInfo(name = "v0", options = "value=-65.0") double y0,
             @ParamInfo(name = "Min Step", options = "value=1e-6D") double minStep,
             @ParamInfo(name = "Max Step", options = "value=1e-2D") double maxStep,
             @ParamInfo(name = "Abs.Tol.", options = "value=1e-10") double absTol,
@@ -72,8 +72,8 @@ public class ODESolver implements Serializable {
 
 //        final Trajectory result = new Trajectory(label);
         final Trajectory[] result = new Trajectory[4];
-        final VFunction2D v0 = new VFunction2D();
         
+     
         for (int i = 0; i < result.length; i++) {
             result[i] = new Trajectory("V,N,M,H");
         }
@@ -84,8 +84,8 @@ public class ODESolver implements Serializable {
                 for (int i = 0; i < result.length; i++) {
                              
                     result[i].add(t0, y0[i]);
-                    System.out.println("step1 nmh: " + t0);
-                    System.out.println("y0[" + i + "] at step 1 nmh:" + y0[i]);
+                    //System.out.println("step1 nmh: " + t0);
+                    //System.out.println("y0[" + i + "] at step 1 nmh:" + y0[i]);
 
                 }
             }
@@ -97,9 +97,9 @@ public class ODESolver implements Serializable {
 
                 for (int i = 0; i < result.length; i++) {
 
-                    result[i].add(t, y[i]);
-                    System.out.println("step2 nmh: " + t);
-                    System.out.println("y[" + i + "] at step 2 nmh: " + y[i]);
+                  result[i].add(t, y[i]);
+                   // System.out.println("step2 nmh: " + t);
+                    //System.out.println("y[" + i + "] at step 2 nmh: " + y[i]);
 
 
                 }

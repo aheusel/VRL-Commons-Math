@@ -60,6 +60,12 @@ public class HFunction2D implements Function2D{
         return 1/(alpha_h + beta_h);
     }
     
+    /**
+     * Running the function
+     * @param x
+     * @param y
+     * @return 
+     */
     @Override 
    public Double run(Double x, Double y){
        

@@ -54,12 +54,7 @@ public class VFunction2D implements Function2D, Serializable{
      */
     private double cm;
     
-    
-    /**
-     * current time step, which is set in the ODESolver 
-     */ 
-    private double t;
-    
+  
     /**
      * potassium channel activation
      */
@@ -98,6 +93,7 @@ public class VFunction2D implements Function2D, Serializable{
             @ParamInfo(name="E_Na in mV", options="value=50.00D") double eNa, 
             @ParamInfo(name="gBar_L in mS/mm^2", options="value=0.003D") double gBarL, 
             @ParamInfo(name="E_L in mV", options="value=-54.387D") double eL,  
+            @ParamInfo(name="I in uA/mm^2", options="value=0.06") double i,
             @ParamInfo(name="Membrane capacity in uF/mm^2", options="value=0.01D") double cm) {
         this.gBarK = gBarK;
         this.eK = eK;
@@ -108,43 +104,10 @@ public class VFunction2D implements Function2D, Serializable{
         this.cm = cm;  
         
     }
-    
-    /**
-     * Set the current time step - this is applied in ODESolver
-     * @param t current time step
-     */
-    @MethodInfo(name="setH", noGUI=true)
-    public void setCurrentT(double t){
-        this.t = t;
-    }
-    
-    /**
-     * User interface to set the onset- and offset-time of the external current
-     * @param ti0 Onset time
-     * @param tin Offset time
-     * @param i
-     */
-    public void setI(
-            @ParamInfo(name="Onset of external current (>0)")double ti0,
-            @ParamInfo(name="Offset of external current")double tin,
-            @ParamInfo(name="external current")double i){
-        
-        if(ti0>tin){
-            System.err.println("Onset time cannot be bigger than offset time!");//need exception here TODO
-        }
-        
-      
-        
-            if(ti0<=t && tin>=t ){
-                this.i=i;
-            }else{
-                this.i = 0;     
-            }    
-            System.out.println("So jetzt ist hier aber unser I: "+this.i );    
- 
-    }
-            
    
+    
+   
+    
     @MethodInfo(name="setN", noGUI=true)
     public void setN(double n) {
         this.n = n;

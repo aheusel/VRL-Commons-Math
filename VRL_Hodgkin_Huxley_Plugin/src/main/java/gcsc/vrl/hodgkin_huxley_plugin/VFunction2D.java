@@ -84,6 +84,7 @@ public class VFunction2D implements Function2D, Serializable{
      * @param eNa equilibrium potential of sodium
      * @param gBarL maximal leakage-conductance
      * @param eL equilibrium potential of leakage current
+     * @param i externally injected current 
      * @param cm membrane capacitance 
      */
     public void init(
@@ -102,6 +103,7 @@ public class VFunction2D implements Function2D, Serializable{
         this.gBarL = gBarL;
         this.eL = eL;
         this.cm = cm;  
+        this.i = i; 
         
     }
    
@@ -148,8 +150,12 @@ public class VFunction2D implements Function2D, Serializable{
     @MethodInfo(name="run", noGUI=true)
     @Override
     public Double run(Double x, Double y) {
-       
-        return (i-(Math.pow(n,4)*gBarK*(y - eK) + Math.pow(m,3)*h*(y - eNa) + gBarL*(y - eL)))/cm;
+        
+        double im = Math.pow(n,4) * gBarK * (y - eK) + Math.pow(m,3) *h* gBarNa* (y - eNa) + gBarL* (y - eL);
+        double tmp = i - im;
+        Double vfct = tmp/cm;
+        
+        return vfct;
         
     }
     

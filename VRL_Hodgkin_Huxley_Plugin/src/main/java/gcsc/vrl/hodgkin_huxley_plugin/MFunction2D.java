@@ -32,14 +32,19 @@ public class MFunction2D implements Function2D{
         double alpha_m;
         double beta_m;
 //        if(v==-40){
-//            alpha_m = 1; //alpha_m = ?
+//            alpha_m = 1; 
 //        }else{
-            alpha_m = 0.1*(v+40)/(1-(Math.exp(-0.1*(v+40))));
+        double num = 0.1*(v+40);
+        double denom = 1 - Math.exp(-0.1*(v+40));
+        alpha_m = num/denom;
 //        }
         
-        beta_m = 4*Math.exp(-0.0556*(v+65));
+        beta_m = 4 * Math.exp(-0.0556 * (v+65));
         
-        return alpha_m/(alpha_m + beta_m);
+        double tmp = alpha_m + beta_m;
+        double m_inf = alpha_m/tmp;
+        
+        return m_inf;
     }
     
     
@@ -52,15 +57,20 @@ public class MFunction2D implements Function2D{
     public double taum(){
         double alpha_m;
         double beta_m;
-        if(v==-40){
-            alpha_m = 1; 
-        }else{
-            alpha_m = 0.1*(v+40)/(1-(Math.exp(-0.1*(v+40))));
-        }
+        //if(v==-40){
+          //  alpha_m = 1; 
+        //}else{
+        double num = 0.1*(v+40);
+        double denom = 1 - Math.exp(-0.1*(v+40));
+        alpha_m = num/denom;
+        //}
         
-        beta_m = 4*Math.exp(-0.0556*(v+65));
+        beta_m = 4 * Math.exp(-0.0556 * (v+65));
         
-        return 1/(alpha_m + beta_m);
+        double tmp = (alpha_m + beta_m);
+        double tau_m = 1/tmp;
+        
+        return tau_m;
     }
     
     /**
@@ -71,8 +81,9 @@ public class MFunction2D implements Function2D{
      */
     @Override 
    public Double run(Double x, Double y){
-       
-     return (minf()-y)/taum();
+                
+        Double mfct = (minf()-y)/taum();
+        return mfct;
     
        
    }   

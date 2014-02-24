@@ -32,10 +32,14 @@ public class HFunction2D implements Function2D{
         double alpha_h;
         double beta_h;
         
-        alpha_h = 0.07 * Math.exp(-0.05*(v+65));
-        beta_h = 1/(1+ Math.exp(-0.1*(v+35)));
+        alpha_h = 0.07 * Math.exp(-0.05 * (v+65));
+        double denom = 1 + Math.exp(-0.1 * (v+35)); 
+        beta_h = 1/denom;
         
-        return alpha_h/(alpha_h + beta_h);
+        double tmp = alpha_h + beta_h;
+        double h_inf = alpha_h/tmp;
+        
+        return h_inf;
     }
     
      /**
@@ -48,10 +52,12 @@ public class HFunction2D implements Function2D{
         double beta_h;
         
         alpha_h = 0.07 * Math.exp(-0.05*(v+65));
-     
         beta_h = 1/(1+ Math.exp(-0.1*(v+35)));
         
-        return 1/(alpha_h + beta_h);
+        double tmp = alpha_h + beta_h;
+        double tau_h = 1/tmp;
+        
+        return tau_h;
     }
     
     /**
@@ -62,8 +68,9 @@ public class HFunction2D implements Function2D{
      */
     @Override 
    public Double run(Double x, Double y){
-       
-       return (hinf()-y)/tauh();
+               
+        Double hfct = (hinf()-y)/tauh(); 
+        return hfct;
      
    }    
    

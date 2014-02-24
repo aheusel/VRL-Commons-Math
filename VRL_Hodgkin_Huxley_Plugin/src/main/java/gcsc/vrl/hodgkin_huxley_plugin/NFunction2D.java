@@ -39,17 +39,20 @@ public class NFunction2D implements Function2D{
         double alpha_n;
         double beta_n; 
         
-        if(v==-55){
-            alpha_n = 1/10;   //alpha_n = ?     
-       }else{
-            alpha_n = 0.01*(v + 55)/(1-(Math.exp(-0.1*(v+55)))); 
+      //  if(v==-55){
+        //    alpha_n = 2;   //alpha_n = ?     
+       //}else{
+        double num = 0.01*(v + 55);
+        double denom = 1 - Math.exp(-0.1*(v+55)) ;
+        alpha_n = num/denom; 
 
-        }
+        //}
         beta_n = 0.125 * Math.exp(-0.0125*(v+65));
+       
+        double tmp = (alpha_n + beta_n);
+        double n_inf = alpha_n/tmp;
         
-
-        
-        return alpha_n/(alpha_n + beta_n);
+        return n_inf;
     }
     
     /**
@@ -64,19 +67,19 @@ public class NFunction2D implements Function2D{
 //        if(v==-55){
 //            alpha_n = 1/10;  //alpha_n = ? 
 //       }else{
-            alpha_n = 0.01*(v + 55)/(1-(Math.exp(-0.1*(v+55))));
-
+        double num = 0.01*(v + 55);
+        double denom = 1 - Math.exp(-0.1*(v+55)) ;
+        alpha_n = num/denom; 
+        
 //        }
         beta_n = 0.125 * Math.exp(-0.0125*(v+65));
 
-//        if(v==10){
-//            alpha_n = 1/10;   //alpha_n = ?     
-//        }else{         
-//             alpha_n = (10-v)/(100 * (Math.exp((10-v)/10)-1));
-//        }
-//        beta_n = 1/8 * Math.exp(-v/80);
-//        
-        return 1/(alpha_n + beta_n);
+        
+        
+        double tmp =(alpha_n + beta_n);
+        double tau_n = 1/tmp;
+        
+        return tau_n;
     }
     
     /**
@@ -87,8 +90,9 @@ public class NFunction2D implements Function2D{
      */
    @Override 
    public Double run(Double x, Double y){
-     
-      return (ninf()-y)/taun();
+    
+       Double nfct = (ninf()-y)/taun(); 
+       return nfct;
        
    }  
    

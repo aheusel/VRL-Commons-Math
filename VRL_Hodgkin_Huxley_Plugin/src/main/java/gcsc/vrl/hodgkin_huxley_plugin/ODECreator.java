@@ -17,9 +17,10 @@ public class ODECreator implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @OutputInfo(name="RHS")
-    public FirstOrderDifferentialEquations createHHequs(VFunction2D vf){
+    public FirstOrderDifferentialEquations createHHequs(VFunction2D vf, IFunction ifct){
         
         HHequs result = new HHequs();
+        result.setIFct(ifct);
         result.setVF(vf);
         return result;
     }

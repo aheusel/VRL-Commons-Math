@@ -54,20 +54,23 @@ public class ODESolver implements Serializable {
             @ParamInfo(name = "t0", options = "value=0.0D") double t0,
             @ParamInfo(name = "tn", options = "value=200.0D") double tn,
             @ParamInfo(name = "v0", options = "value=-65.0") double y0,
-            @ParamInfo(name = "Min Step", options = "value=1e-6D") double minStep,
-            @ParamInfo(name = "Max Step", options = "value=1e-2D") double maxStep,
-            @ParamInfo(name = "Abs.Tol.", options = "value=1e-10") double absTol,
-            @ParamInfo(name = "Rel.Tol.", options = "value=1e-10") double relTol,
-            @ParamInfo(name = "RHS") FirstOrderDifferentialEquations rhs) {
+            @ParamInfo(name = "Min Step", options = "value=1.0E-4D") double minStep,
+            @ParamInfo(name = "Max Step", options = "value=0.01D") double maxStep,
+            @ParamInfo(name = "Abs.Tol.", options = "value=1.0E-4D") double absTol,
+            @ParamInfo(name = "Rel.Tol.", options = "value=1.0E-4D") double relTol,
+            @ParamInfo(name = "RHS") FirstOrderDifferentialEquations rhs,
+            @ParamInfo(name = "CurrentFunction")IFunction ifct) throws InitialCurrentException, FinalCurrentException{
 
 //        String label;
         FirstOrderIntegrator integrator = new DormandPrince54Integrator(minStep, maxStep, absTol, relTol);
 
 //       FirstOrderIntegrator integrator = new EulerIntegrator(0.01);
 
+        
 //        final Trajectory result = new Trajectory(label);
         final Trajectory[] result = new Trajectory[4];
         
+        ifct.compareTi(t0, tn);
      
         for (int i = 0; i < result.length; i++) {
             result[i] = new Trajectory("V,N,M,H");

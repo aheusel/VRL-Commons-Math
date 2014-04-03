@@ -37,6 +37,7 @@ public class HHPluginConfigurator extends VPluginConfigurator{
             vapi.addComponent(ODECreator.class);
             vapi.addComponent(ODESolver.class);
             vapi.addComponent(VFunction2D.class);
+            vapi.addComponent(IFunction.class);
         }
     }
     

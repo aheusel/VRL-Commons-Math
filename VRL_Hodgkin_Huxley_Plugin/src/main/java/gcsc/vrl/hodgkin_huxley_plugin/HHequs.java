@@ -15,12 +15,17 @@ public class HHequs implements FirstOrderDifferentialEquations{
     private final NFunction2D nf = new NFunction2D();
     private final MFunction2D mf = new MFunction2D();
     private final HFunction2D hf = new HFunction2D();
+    private IFunction ifct; 
 
     public HHequs() {
         
     }
 
     
+    public void setIFct(IFunction ifct){
+        this.ifct = ifct; 
+    }
+            
     public void setVF(VFunction2D vf) {
         this.vf =  vf;
     }
@@ -32,11 +37,13 @@ public class HHequs implements FirstOrderDifferentialEquations{
 
     @Override
     public void computeDerivatives(double t, double[] y, double[] yDot) throws MaxCountExceededException, DimensionMismatchException {
-
+        
         double v = y[0];
         double n = y[1];
         double m = y[2];
         double h = y[3];
+        
+        vf.setI(ifct.calculateI(t));
         
         vf.setN(n);
         vf.setM(m);

@@ -70,10 +70,13 @@ public class VFunction2D implements Function2D, Serializable{
      */
     private double h;
 
+   
     /**
      * constructor - creates 2D-voltage function
      */
     public VFunction2D() {
+        
+         
     }
     
     /**
@@ -94,7 +97,6 @@ public class VFunction2D implements Function2D, Serializable{
             @ParamInfo(name="E_Na in mV", options="value=50.00D") double eNa, 
             @ParamInfo(name="gBar_L in mS/mm^2", options="value=0.003D") double gBarL, 
             @ParamInfo(name="E_L in mV", options="value=-54.387D") double eL,  
-            @ParamInfo(name="I in uA/mm^2", options="value=0.06") double i,
             @ParamInfo(name="Membrane capacity in uF/mm^2", options="value=0.01D") double cm) {
         this.gBarK = gBarK;
         this.eK = eK;
@@ -103,12 +105,14 @@ public class VFunction2D implements Function2D, Serializable{
         this.gBarL = gBarL;
         this.eL = eL;
         this.cm = cm;  
-        this.i = i; 
-        
+          
     }
    
     
-   
+    @MethodInfo(name="setI", noGUI=true)
+    public void setI(double i){
+        this.i=i;
+    }
     
     @MethodInfo(name="setN", noGUI=true)
     public void setN(double n) {
@@ -123,6 +127,11 @@ public class VFunction2D implements Function2D, Serializable{
     @MethodInfo(name="setH", noGUI=true)
     public void setH(double h) {
         this.h = h;
+    }
+    
+    @MethodInfo(name="getI", noGUI=true)
+    public double getI(){
+        return i;
     }
     
     @MethodInfo(name="getN", noGUI=true)

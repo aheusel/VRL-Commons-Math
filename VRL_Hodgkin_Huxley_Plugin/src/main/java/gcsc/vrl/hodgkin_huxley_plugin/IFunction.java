@@ -31,8 +31,21 @@ public class IFunction implements Serializable{
      * end of current induction in ms
      */
     private double t_in;
+
     
-    @MethodInfo(name="calculateI")
+    public IFunction() {
+    }
+    
+    
+    
+    /**
+     * initialization of the current i, the initial time of stimulation t_i0 and the final time of stimulation t_in; an exception is thrown when t_in < t_i0
+     * @param i
+     * @param t_i0
+     * @param t_in
+     * @throws InitialExceedsFinalException 
+     */
+    @MethodInfo(name="init")
     public void init(
             @ParamInfo(name="current i in uA/mm^2", options="value=0.07D") double i, 
             @ParamInfo(name="Initial time of current induction in ms", options="value=1.0D")double t_i0, 
@@ -47,6 +60,11 @@ public class IFunction implements Serializable{
         }
     }
     
+    /**
+     * Setting the current-value at different time intervals 
+     * @param t
+     * @return current i 
+     */
     @MethodInfo(name="calculateI", noGUI=true)
     public double calculateI(double t){
    
@@ -62,6 +80,15 @@ public class IFunction implements Serializable{
         
     }
     
+    /**
+     * Comparison of initial stimulation (t_i0) with the start point of simulation (t0), where t_i0 may not be smaller than t0 (exception is thrown at violation)
+     * and comparison of the final stimulation (t_in) with the ending time of simulation (tn), where t_in may not exceed the value of t_n (exception is thrown at violation) 
+     * @param t0
+     * @param tn
+     * @throws InitialCurrentException
+     * @throws FinalCurrentException 
+     */
+    @MethodInfo(name="compareTi", noGUI=true)
     public void compareTi(double t0, double tn ) throws InitialCurrentException, FinalCurrentException{
             //throws InitialCurrentException, FinalCurrentException{
         if(t_i0 < t0){

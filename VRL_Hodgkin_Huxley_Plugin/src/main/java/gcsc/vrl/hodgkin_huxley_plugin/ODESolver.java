@@ -72,8 +72,22 @@ public class ODESolver implements Serializable {
         
         ifct.compareTi(t0, tn);
      
+        result[0]= new Trajectory("V"); 
+        result[1]= new Trajectory("N"); 
+        result[2]= new Trajectory("M"); 
+        result[3]= new Trajectory("H"); 
+     
+        
+      
         for (int i = 0; i < result.length; i++) {
-            result[i] = new Trajectory("V,N,M,H");
+        
+            result[i].setTitle("Hodgkin Huxley model");  
+            result[i].setxAxisLabel("time (ms)");
+            if(i > 0){
+                result[i].setyAxisLabel("gating variables");
+            }else{
+                result[i].setyAxisLabel("Potential (mV)");
+            }
         }
 
         StepHandler stepHandler = new StepHandler() {
